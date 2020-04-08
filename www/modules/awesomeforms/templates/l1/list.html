@@ -1,0 +1,114 @@
+<ion-view class="awesome-forms">
+    <ion-nav-title>{{ page_title }}</ion-nav-title>
+
+    <ion-content sb-background-image>
+
+        <div class="list">
+
+            <label class="item item-input  item-custom" ng-show="chartVisible">
+                <div class="input-label">
+                    <img width="250" height="100" src="{{selectedChartItem.value}}"/>
+                </div>
+            </label>
+
+            <label class="item  item-custom item-select" ng-show="chartVisible">
+                <select ng-model="selectedChartItem" ng-options="S.label for S in chartItems"
+                        ng-change="applyUserFilter(S)">
+                </select>
+            </label>
+
+            <label class="item  item-custom">
+                <button class="button button-block button-custom" ng-click="addNew()">{{ "Add New" | translate }}
+                </button>
+            </label>
+        </div>
+
+        <div class="list" style="margin: 20px">
+            <label class="" ng-repeat="col in fields">
+                <input type="checkbox" ng-model-options="{ getterSetter: true }" class="" ng-model="col.show"/>
+                {{col.title}}
+            </label>
+        </div>
+
+        <div class="list">
+            <table ng-table-dynamic="tableParams with fields" class="table container" show-filter="true">
+                <tr ng-repeat="row in $data" ng-click="update(row)">
+                    <td ng-repeat="col in fields"  ng-switch on="col.type" >
+                    <div ng-switch-default=""> {{row[col.field]}} </div>
+                    <span ng-switch-when="date">	{{row[col.field] | date:"dd/mm/yyyy HH:mm" }} </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <style type="text/css">
+            .awesome-forms .table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .awesome-forms .table > thead > tr > th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #ddd;
+            }
+
+            .awesome-forms .table > tbody > tr > td,
+            .awesome-forms .table > tbody > tr > th,
+            .awesome-forms .table > tfoot > tr > td,
+            .awesome-forms .table > tfoot > tr > th,
+            .awesome-forms .table > thead > tr > td,
+            .awesome-forms .table > thead > tr > th {
+                padding: 8px;
+                line-height: 1.42857143;
+                vertical-align: top;
+                border-top: 1px solid #ddd;
+            }
+
+            .awesome-forms .form-control {
+                display: block;
+                width: 100% !important;
+                height: 34px !important;
+                padding: 6px 12px !important;
+                font-size: 14px !important;
+                line-height: 1.42857143 !important;
+                color: #555 !important;
+                background-color: #fff !important;
+                background-image: none !important;
+                border: 1px solid #ccc !important;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            }
+
+            .awesome-forms .pagination {
+                display: none;
+                text-align: center;
+                margin-left: 10px;
+            }
+
+            .awesome-forms .pagination li,
+            .awesome-forms .pagination li a {
+                color: black;
+                float: left;
+                padding: 5px 3px;
+                text-decoration: none;
+                font-size:22px;
+                font-weight:bold;
+            }
+            
+            .ng-table-counts button{
+            	
+            margin:2px 2px 2px 2px;
+            }
+            .ng-table-counts button.active{
+             background:#cccccc;
+            }
+
+        </style>
+
+    </ion-content>
+</ion-view>

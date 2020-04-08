@@ -1,0 +1,28 @@
+<div class="layout {{ features.layoutOptions.label }}">
+    <ion-content class="homepage-custom" scrollbar-y="false">
+    <div class="mylogo">
+	<img ng-src="{{ features.layoutOptions.mylogo }}" alt="Logo"/>
+	</div>
+		<ul class="items homepage-custom">
+            <li ng-repeat="feature in features.options" class="border-custom" tabbar-items option="feature" id="feature-{{ $index }}" go-to-url="goTo(feature)">
+                <img ng-src="{{ feature.icon_url }}"/>
+                <p class="{{ features.layoutOptions.title+' '+features.layoutOptions.textTransform }}">{{ feature.name }}</p>
+                <div ng-if="feature.code == 'push_notification' && push_badge" class="badge-custom">{{ push_badge }}</div>
+            </li>
+        </ul>
+    </ion-content>
+</div>
+
+<style>
+.layout.r99 .mylogo, .layout.r9 .mylogo {
+display: {{ features.layoutOptions.label1 }};
+}
+
+.menu-open .menu-content{
+transform: translate3d(-{{ features.layoutOptions.sidemenuwidth }}, 0px, 0px) !important;
+}
+
+.menu.menu-right{ width: {{ features.layoutOptions.sidemenuwidth }} !important;}
+
+.bar .buttons-right span.secondary-buttons { display: {{ features.layoutOptions.label2 }} !important; } 
+</style>

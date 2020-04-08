@@ -1,0 +1,44 @@
+<ion-view sb-page-background
+          class="module-loginredirect loginredirect-layout1">
+    <ion-nav-title>{{ page_title }}</ion-nav-title>
+    <ion-content>
+
+
+
+        <div class="list"
+        
+             ng-class="{'card': cardDesign}"
+            >
+            <a tabbar-items
+               class="item item-custom item-avatar-square"
+               option="item"
+               ng-repeat="item in collection"
+               ng-class="{
+                'item-avatar': item.thumbnail,
+                'item-center': (!item.subtitle && !item.message)}">
+
+                <img ng-src="{{ imagePath(item.thumbnail) }}"
+                     ng-if="item.thumbnail" />
+                <h2>{{ item.title }}</h2>
+                <p ng-if="item.subtitle">{{ item.subtitle }}</p>
+            </a>
+            
+            
+        </div>
+
+        <div class="list loginredirect-layout loginredirect-l1"
+             ng-class="{'card': cardDesign}"
+             ng-if="!is_loading && !collection.length && !cover && !search.searchValue">
+            <div class="item text-center item-custom">
+                {{ "No items found" | translate }}
+            </div>
+        </div>
+
+    </ion-content>
+
+    <style type="text/css">
+        .loginredirect-layout.loginredirect-l1 {
+            margin-top: 15px;
+        }
+    </style>
+</ion-view>

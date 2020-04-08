@@ -1,0 +1,357 @@
+<ion-view class="awesome-forms">
+    <ion-nav-title>{{ page_title }}</ion-nav-title>
+    <ion-content sb-background-image>
+		
+        <form name="form" ng-submit="post()">
+			<div class="description card" style="box-shadow:0px 0px 0px!important">{{ settings.description }}</div>
+            <div ng-repeat="section in sections" ng-show="sections">
+
+                <div class="list">
+
+                    <div class="item item-divider item-divider-custom">
+                        <h2>{{ section.name }}</h2>
+                    </div>
+
+                    <div ng-repeat="field in section.fields" ng-switch on="field.type">
+
+                        <label class="item item-input item-custom" ng-switch-when="texte">
+                            <div class="input-label"  ng-if="formData[field.id]">
+                                {{ field.name }}
+                            </div>
+                            <input type="text" ng-class="{'text-right' : formData[field.id] }" class="text-left" placeholder="{{ field.name }}"
+                                   ng-model="formData[field.id]"/>
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="textarea">
+                            <div class="input-label" style="display: inline;" ng-if="formData[field.id]">
+                                {{ field.name }}
+                            </div>
+                            <textarea rows="3"   ng-class="{'text-right' : formData[field.id] }" class="text-left" style="padding-right: 24px;" placeholder="{{ field.name }}" ng-model="formData[field.id]"></textarea>
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="email">
+                            <div class="input-label"  ng-if="formData[field.id]">
+                                {{ field.name }}
+                            </div>
+                            <input type="email"  ng-class="{'text-right' : formData[field.id] }" class="text-left" placeholder="{{ field.name }}"
+                                   ng-model="formData[field.id]"/>
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="nombre">
+                            <div class="input-label"  ng-if="formData[field.id]">
+                                {{ field.name }}
+                            </div>
+                            <input type="number"  ng-class="{'text-right' : formData[field.id] }" class="text-left" placeholder="{{ field.name }}"
+                                   ng-model="formData[field.id]"/>
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="telephone">
+                            <div class="item-label">
+                                <p class="label">{{ field.name }}</p>
+                            </div>
+                            <!--<div class="input-label">-->
+                            <!--    {{ field.name }}-->
+                            <!--</div>-->
+
+                            <intlpn ng-model="formData[field.id]" default-country="{{country}}" style="margin-left: auto;border:0px"
+                                    placeholder="{{ field.name }}" class=" text-right checkbox-custom"></intlpn>
+
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="date">
+                            <span class="input-label" >{{ field.name }}</span>
+                            <input type="datetime-local" placeholder="{{ field.name }}" date="formData[field.id]"
+                                   ng-model="formData[field.id] "/>
+                        </label>
+
+                        <label class="item item-input item-custom" ng-switch-when="birthday">
+                            <span class="input-label">{{ field.name }}</span>
+                            <input type="date" placeholder="{{ field.name }}" date="formData[field.id]"
+                                   ng-model="formData[field.id] " class="text-right"/>
+                        </label>
+
+
+                        <label class="item item-input item-custom" ng-switch-when="anniversary">
+                            <span class="input-label">{{ field.name }}</span>
+                            <input type="date" placeholder="{{ field.name }}" date="formData[field.id]"
+                                   ng-model="formData[field.id] " class="text-right"/>
+                        </label>
+
+
+                        <div ng-switch-when="geoloc">
+                            <ion-checkbox class="checkbox-custom" ng-model="geolocation[field.id]"
+                                          ng-change="getLocation(field)" ng-checked="geolocation[field.id] == true">{{
+                                field.name }}
+                            </ion-checkbox>
+                        </div>
+                        
+                        
+                         
+                        
+                        <div class="item item-input item-custom" ng-switch-when="address">
+                            <!--<div class="input-label">-->
+                            <!--    {{ field.name }}-->
+                            <!--</div>-->
+                            <input type="text" class="text-right"    placeholder="{{ field.name }}"
+                                   ng-model="formData[field.id]"/>
+                                   
+                            <div class="item item-icon-left item-custom" ng-click="getLocationAddress(field)">
+	                            <i class="icon ion-map"></i>
+	                            {{ "Fetch Location Info" | translate }}
+	                        </div>
+                         
+                        </div>
+
+                        <div ng-switch-when="checkbox" class="">
+                            <div class="item item-divider item-divider-custom">
+                                <p class="label">{{ field.name }}</p>
+                            </div>
+                            <ion-checkbox class="checkbox-custom" ng-repeat="option in field.options"
+                                          ng-value="option.id" ng-model="formData[field.id][option.id]">{{ option.name
+                                }}
+                            </ion-checkbox>
+                        </div>
+
+                        <div ng-switch-when="pushtopics" class="" ng-if="can_take_pictures">
+                            <div class="item item-divider item-divider-custom">
+                                <p class="label">{{ field.name }}</p>
+                            </div>
+                            <ion-checkbox class="checkbox-custom" ng-repeat="option in field.options"
+                                          ng-value="option.id" ng-model="formData[field.id][option.id]">{{ option.name
+                                }}
+                            </ion-checkbox>
+                        </div>
+
+                        <div ng-switch-when="userroles">
+                            <div class="item item-divider item-divider-custom">
+                                <p class="label">{{ field.name }}</p>
+                            </div>
+                            <ion-radio name="radio_{{ field.id }}" class="radio-custom"
+                                       ng-repeat="option in field.options" ng-model="formData[field.id]"
+                                       ng-value="option.id">{{ option.name }}
+                            </ion-radio>
+                        </div>
+
+                        <div ng-switch-when="radio">
+                            <div class="item item-divider item-divider-custom">
+                                <p class="label">{{ field.name }}</p>
+                            </div>
+                            <ion-radio name="radio_{{ field.id }}" class="radio-custom"
+                                       ng-repeat="option in field.options" ng-model="formData[field.id]"
+                                       ng-value="option.id">{{ option.name }}
+                            </ion-radio>
+                        </div>
+
+                        <label class="item item-input item-select item-custom" ng-switch-when="select">
+                            <div class="input-label">
+                                {{ field.name }}
+                            </div>
+                            <select ng-model="formData[field.id]"
+                                    ng-options="option.id as option.name for option in field.options">
+                                <option value=""></option>
+                            </select>
+                        </label>
+
+                        <div ng-switch-when="image">
+                            <span class="input-label">{{ field.name }}</span>
+
+                            <div class="item item-image item-custom" ng-if="preview_src[field.id]">
+                                <img ng-src="{{ preview_src[field.id] }}" width="100%"/>
+                            </div>
+
+                            <div class="item item-icon-left item-custom" ng-click="takePicture(field)">
+                                <i class="icon ion-image"></i>
+                                {{ "Add Image" | translate }}
+                            </div>
+
+                        </div>
+                        
+                        <label class="item item-input  item-custom" ng-switch-when="signature">
+                            <div class="input-label">
+                                {{ field.name }}
+                            </div>
+                             <div class="item item-image item-custom" ng-if="formData[field.id]" style="position: absolute;width: 100px;right: 3px;top: 8px;">
+                                <img ng-src="{{ formData[field.id] }}" /> 
+                            </div>
+                            <canvas class="signaturePadCanvas" field-id="{{field.id}}" style="display: block; border: 1px solid #000;margin: 0 auto;" ng-mouseup="onMouseup()" ng-mousedown="notifyDrawing({ drawing: true })"></canvas>
+
+                            
+                        </label>
+                       
+
+                        <div ng-switch-default="">
+                            <div class="item item-custom">
+                                <p>{{ field.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list">
+                <button type="button" class="button button-block button-custom" ng-click="post()"
+                        ng-show="sections.length && !is_loading">{{ "Save" | translate }}
+                </button>
+                <button type="button" class="button button-block button-custom" ng-click="post(1)"
+                        ng-show="sections.length && !is_loading">{{ "Send" | translate }}
+                </button>
+                <div class="loader" ng-show="is_loading">
+                    <ion-spinner class="spinner-custom"></ion-spinner>
+                </div>
+            </div>
+
+            <div class="list" ng-if="!is_loading && !sections.length">
+                <div class="item text-center item-custom">
+                    {{ "No items found" | translate }}
+                </div>
+            </div>
+
+
+        </form>
+
+
+        <div class="list" ng-if="data.length">
+            <div class="item text-center item-custom">
+                {{ "Update History" | translate }}
+            </div>
+        </div>
+        <div class="list" ng-if="data.length">
+            <table ng-table-dynamic="tableParams with fields" class="table container" show-filter="false">
+
+
+                <tr ng-repeat="row in $data">
+                     <td ng-repeat="col in fields"  ng-switch on="col.type" >
+                    <div ng-switch-default=""> {{row[col.field]}} </div>
+                    <span ng-switch-when="date">	{{row[col.field] | date:"dd/mm/yyyy HH:mm" }} </span>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <style type="text/css">
+        
+        	.container {
+            border: 1px solid red;
+            padding: 10px 10px 40px 10px;
+            position: relative;
+            margin: 0 auto 0 auto;
+            height: 100%;
+          }
+          .container .signature {
+            border: 1px solid orange;
+            margin: 0 auto;
+            cursor: pointer;
+          }
+          .container .signature canvas {
+            border: 1px solid #999;
+            margin: 0 auto;
+            cursor: pointer;
+          }
+          .container .buttons {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+          }
+          .container .sizes {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+          }
+          .container .sizes input {
+            width: 4em;
+            text-align: center;
+          }
+          .result {
+            border: 1px solid blue;
+            margin: 30px auto 0 auto;
+            height: 220px;
+            width: 568px;
+          }
+          
+            .awesome-forms .table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .awesome-forms .table > thead > tr > th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #ddd;
+            }
+
+            .awesome-forms .table > tbody > tr > td,
+            .awesome-forms .table > tbody > tr > th,
+            .awesome-forms .table > tfoot > tr > td,
+            .awesome-forms .table > tfoot > tr > th,
+            .awesome-forms .table > thead > tr > td,
+            .awesome-forms .table > thead > tr > th {
+                padding: 8px;
+                line-height: 1.42857143;
+                vertical-align: top;
+                border-top: 1px solid #ddd;
+            }
+
+            .awesome-forms .form-control {
+                display: block;
+                width: 100% !important;
+                height: 34px !important;
+                padding: 6px 12px !important;
+                font-size: 14px !important;
+                line-height: 1.42857143 !important;
+                color: #555 !important;
+                background-color: #fff !important;
+                background-image: none !important;
+                border: 1px solid #ccc !important;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            }
+
+            .awesome-forms .pagination {
+                display: inline-block;
+                text-align: center;
+                margin-left: 10px;
+            }
+
+            .awesome-forms .pagination li,
+            .awesome-forms .pagination li a {
+                color: black;
+                float: left;
+                padding: 5px 3px;
+                text-decoration: none;
+            }
+            
+            
+              .awesome-forms .pagination {
+                display: none;
+                text-align: center;
+                margin-left: 10px;
+            }
+
+            .awesome-forms .pagination li,
+            .awesome-forms .pagination li a {
+                color: black;
+                float: left;
+                padding: 5px 3px;
+                text-decoration: none;
+                font-size:22px;
+                font-weight:bold;
+            }
+            
+            .ng-table-counts button{
+            	
+            margin:2px 2px 2px 2px;
+            }
+            .ng-table-counts button.active{
+             background:#cccccc;
+            }
+
+        </style>
+
+    </ion-content>
+
+</ion-view>

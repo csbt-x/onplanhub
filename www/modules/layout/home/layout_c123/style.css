@@ -1,0 +1,13 @@
+.layout.c1 ion-content, .layout.c2 ion-content, .layout.c3 ion-content {position: absolute; width: 100%; bottom: 0; top: initial;}
+.layout.c1 .inner-scroll, .layout.c2 .inner-scroll, .layout.c3 .inner-scroll {width: 100%; height: 100%;}
+.layout.c3 li {float: left; width: 100%; margin: 0; border: 0;} 
+.layout.c2 li {float: left; width: 48%; margin: 0 1% 2% 1%; border: 0;}
+.layout.c3 li {float: left; width: 31%; margin: 0 1.16% 2% 1.16%; border: 0;} 
+.layout.c1 li .items, .layout.c2 li .items, .layout.c3 li .items {padding: 20px 0 0 0; border: 0; background-position: center top; background-repeat: no-repeat;}
+.layout.c1 li p {text-transform: uppercase; line-height: 36px;  height: 30px;  overflow: hidden; }
+.layout.c2 li p {text-transform: uppercase; line-height: 36px;  height: 30px;  overflow: hidden;}
+.layout.c3 li p {text-transform: uppercase; line-height: 20px;  height: 20px;  overflow: hidden; font-size: 12px;}
+
+.layout.c1 .title-lowcase, .layout.c2 .title-lowcase, .layout.c3 .title-lowcase { text-transform: inherit; }
+
+.layout.c1 .title-uppercase, .layout.c2 .title-uppercase, .layout.c2 .title-uppercase  { text-transform: uppercase; }

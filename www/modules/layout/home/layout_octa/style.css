@@ -1,0 +1,12 @@
+.layout.octamenu { position: absolute; margin:auto; left: 0; right: 0;  width: 256px; height: 256px; text-align: center;}
+.layout.octamenu ul { list-style: none; padding: 0; margin-top: -16px;}
+.layout.octamenu li { width:120px; height: 44px;}
+.layout.octamenu li p { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin: 13px; font-size: 18px;}
+.layout.octamenu li:nth-child(1)   {position: absolute;  left: 68px; top: 0px; transform: rotate(-90deg); }
+.layout.octamenu li:nth-child(2)   {position: absolute;  left: 147px; top: 32px; transform: rotate(-45deg);} 
+.layout.octamenu li:nth-child(3)   {position: absolute; left: 179px; top: 112px; }
+.layout.octamenu li:nth-child(4)   {position: absolute; left: 147px; top: 191px; transform: rotate(45deg);}
+.layout.octamenu li:nth-child(5)   {position: absolute;   left: 68px; top:223px; transform: rotate(90deg);}
+.layout.octamenu li:nth-child(6)   {position: absolute;   left: -11px; top: 191px; transform: rotate(-45deg);}
+.layout.octamenu li:nth-child(7)   {position: absolute; left: -44px; top: 112px; }
+.layout.octamenu li:nth-child(8)   {position: absolute;  left: -12px; top: 32px;  transform: rotate(45deg);}

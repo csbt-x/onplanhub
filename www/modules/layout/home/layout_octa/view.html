@@ -1,0 +1,22 @@
+<div class="layout octamenu" ng-controller="OctaCtrl">
+  <ul>
+    <div ng-show = "IsVisible">
+    <li class="homepage-custom" ng-repeat="feature in features.options | limitTo : 8" tabbar-items option="feature" go-to-url="goTo(feature)" ng-class="{ 'no-border': tabbar_is_transparent }">
+	<p>{{ feature.name }}</p>
+	</li>
+    </div>	
+	<a ng-click="ShowHide()"><img src="{{ features.layoutOptions.imgurl }}"></a>
+  </ul>
+</div>
+<style>
+.layout.octamenu img { 
+padding-top: {{ features.layoutOptions.imgtop }}; 
+width: {{ features.layoutOptions.imgwh }};
+height: auto;
+}
+.layout.octamenu { 
+top: {{ features.layoutOptions.menutop }};
+bottom: {{ features.layoutOptions.menubottom }};
+}
+.layout.octamenu {text-transform: {{features.layoutOptions.textTransform}}
+</style>

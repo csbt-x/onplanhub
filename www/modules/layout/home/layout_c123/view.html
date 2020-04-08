@@ -1,0 +1,35 @@
+<div class="layout c{{ features.layoutOptions.column }}">
+    <ion-content>
+        <ul class="inner-scroll">
+            <li class="text-center homepage-custom translucent" ng-repeat="feature in features.options" tabbar-items option="feature" go-to-url="goTo(feature)">
+                <div class="items">
+                    <img ng-src="{{ feature.icon_url }}" />
+                    <p class="{{ features.layoutOptions.textTransform }}">{{ feature.name }}</p>
+                    <div ng-if="feature.code == 'push_notification' && push_badge" class="badge-custom">{{ push_badge }}</div>
+                </div>
+            </li>
+        </ul>
+    </ion-content>
+</div>
+
+<style>
+.layout.c1 li .items, .layout.c2 li .items, .layout.c3 li .items {
+background-image: url({{ features.layoutOptions.bgimage }});
+padding-top: {{ features.layoutOptions.padtop }};
+}
+
+.layout.c1 li img, .layout.c2 li img, .layout.c3 li img {
+margin-left: {{ features.layoutOptions.imgleft }};
+height: {{ features.layoutOptions.imgsize }};
+width: {{ features.layoutOptions.imgsize }};
+}
+
+.layout.c1 li p, .layout.c2 li p, .layout.c3 li p {
+margin-top: {{ features.layoutOptions.texttop }};
+}
+
+.layout.c1 ion-content, .layout.c2 ion-content, .layout.c3 ion-content {
+height: {{ features.layoutOptions.menuheight }}; 
+}
+
+</style>

@@ -1,0 +1,87 @@
+<div class="layout fabmenu" ng-controller="FABController">
+<div id="sidebar">
+<div class="toggle-btn" onclick="toggleSidebar(); toggle_div_fun('fabhide');">
+</div>
+
+<div class="{{ features.layoutOptions.label }}">
+    <ion-content class="homepage-custom" scrollbar-y="false">
+        <ul class="items homepage-custom">
+            <li ng-repeat="feature in features.options" class="border-custom" tabbar-items option="feature" id="feature-{{ $index }}" go-to-url="goTo(feature)">
+                <img ng-src="{{ feature.icon_url }}"/>
+                <p>{{ feature.name }}</p>
+                <div ng-if="feature.code == 'push_notification' && push_badge" class="badge-custom">{{ push_badge }}</div>
+            </li>
+        </ul>
+    </ion-content>
+</div>
+
+</div>
+
+<div id="fabhide">
+<!-- FAB Menu Start -->
+<div class="fab-wrap">
+<div class="fab">
+	<div class="fab1">	
+		<input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle" style="margin: 0;"></label>
+		<div class="links">
+		<ul>
+			<li ng-repeat="feature in features.options | limitTo : 4" class="homepage-custom translucent border-custom" tabbar-items option="feature" go-to-url="goTo(feature)" ng-class="{ 'no-border': tabbar_is_transparent }" data-title="{{ feature.name }}">
+			<img ng-src="{{ feature.icon_url }}" />
+			</li>
+		</ul>
+		</div>
+	</div>
+</div>
+</div> 
+<!-- FAB Menu Ends -->
+</div>
+</div>
+    
+
+<style>
+.layout.fabmenu .fab .fab1 .links li:before {
+color: {{ features.layoutOptions.textclr }};
+background: {{ features.layoutOptions.textbgclr }};
+min-width: {{ features.layoutOptions.textwidth }};
+}
+
+.layout.fabmenu .fab .fab1 .links li:before {
+text-align: {{ features.layoutOptions.textalign }};
+}
+
+.layout.fabmenu .fab .fab1 .toggle {
+background-color: {{ features.layoutOptions.togglebgclr }};
+}
+
+.layout.fabmenu .fab .fab1 .toggle:before,
+.layout.fabmenu .fab .fab1 .toggle:after {
+background: {{ features.layoutOptions.toggleiconclr }};
+}
+
+.layout.fabmenu #sidebar {
+width: {{ features.layoutOptions.togglemenuwidth }};
+left: -{{ features.layoutOptions.togglemenuwidth }};
+}
+
+.layout.fabmenu .toggle-btn { left: {{ features.layoutOptions.togglemenuwidth }}; }
+
+.layout.fabmenu .r99 ul.items li p, .layout.fabmenu .r9 li p {
+text-transform: {{ features.layoutOptions.texttransform }};
+}
+
+ .layout.fabmenu .toggle-btn {
+ width: {{ features.layoutOptions.togglebtnsize }};
+ height: {{ features.layoutOptions.togglebtnsize }}; 
+ background: url({{ features.layoutOptions.menuiconurl }});
+ background-size: cover;
+ background-repeat: no-repeat;
+}
+
+.layout.fabmenu .active div.toggle-btn {
+ width: {{ features.layoutOptions.togglebtnsize }};
+ height: {{ features.layoutOptions.togglebtnsize }};
+ background: url({{ features.layoutOptions.closeiconurl }});
+ background-size: cover;
+ background-repeat: no-repeat;
+} 
+</style>
